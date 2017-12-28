@@ -1,5 +1,4 @@
 ﻿add_namespace = france
-add_namespace = maurize_thorez
 
 # Japan demands Indochina
 country_event = {
@@ -25,7 +24,7 @@ country_event = {
 				}
 			}
 			modifier = {
-				factor = 75
+				factor = 175 #EAI
 				16 = { NOT = { is_controlled_by = FRA } } #Paris	
 			}
 		} 
@@ -273,6 +272,7 @@ country_event = {
 		name = france.12.a
 		# Franco-British Union created
 		set_global_flag = fall_of_france
+		set_global_flag = franco-british_union_formed #EOUH
 		hidden_effect = {
 			every_state = {
 				limit = {
@@ -333,9 +333,7 @@ country_event = {
 	
 	option = { # Agree
 		name = france.14.a
-		ai_chance = {
-			factor = 50
-		}
+		trigger = { OR = { NOT = { has_global_flag = EAI_aggressive_GER } is_ai = no is_historical_focus_on = no } } #EAI
 		#Set same cosmetic tag they would get on capitulation
 		FRA = {
 			set_cosmetic_tag = FRA_FREE
@@ -557,7 +555,8 @@ country_event = {
 				ideology = fascism
 				size = 0.5
 				capital = 26
-				states = { 26 21 22 31 25 20 32 33 1 735 677 680 554 458 }
+				#states = { 26 21 22 31 25 20 32 33 1 735 677 680 554 458 }
+				states = { 26 21 22 31 25 20 32 33 1 735 677 680 554 458 665 458 460 513 459 461 462 } #EAI
 				states_filter = {
 					owner = { original_tag = FRA }
 					OR = {
@@ -631,13 +630,7 @@ country_event = {
 	}
 	option = { # Conquer everything!
 		name = france.14.b
-		ai_chance = { 
-			factor = 50 
-			modifier = {
-				is_historical_focus_on = yes
-				factor = 0
-			}
-		}
+		trigger = { OR = { has_global_flag = EAI_aggressive_GER is_historical_focus_on = no is_ai = no } } #EAI
 		FRA = {
 			country_event = { hours = 6 id = france.15 }
 		}
@@ -842,8 +835,6 @@ country_event = {
 		}
 	}	
 }
-
-
 # Strikes are over
 country_event = {
 	id = france.23
