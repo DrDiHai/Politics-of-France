@@ -1,0 +1,137 @@
+ideas = {
+    country = {
+        FRA_labor_reforms = {
+			picture = generic_communism_drift_bonus
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+            modifier = {
+				production_speed_industrial_complex_factor = -0.05
+                industrial_capacity_factory = -0.05
+                army_core_defence_factor = 0.1
+            }
+        }
+        FRA_mobilized_army = {
+			picture = generic_war_preparation
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+            modifier = {
+				production_speed_industrial_complex_factor = -0.05
+                industrial_capacity_factory = 0.05
+                army_core_defence_factor = -0.1
+            }
+        }
+        FRA_nationalized_air = {
+			picture = generic_air_bonus
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+                always = yes
+			}
+			equipment_bonus = {
+				fighter_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+        }
+		FRA_matignon_laws = {
+			picture = FRA_matignon_agreements
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+
+			modifier = {
+				production_speed_industrial_complex_factor = -0.05
+				industrial_capacity_factory =  -0.05
+				industrial_capacity_dockyard = -0.05
+				unity_factor = 0.1
+			}
+		}
+		FRA_matignon_laws_reformed = {
+			picture = FRA_matignon_agreements
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+
+			modifier = {
+				production_speed_industrial_complex_factor = -0.05
+				unity_factor = 0.05
+			}
+		}
+
+        FRA_fiscal_reform_idea = {
+			picture = generic_central_management
+            allowed = {
+                always = no
+            }
+
+            allowed_civil_war = {
+                NOT = {
+                    has_government = fascism
+                }
+            }
+
+            modifier = {
+                production_speed_industrial_complex_factor = 0.05
+            }
+        }
+		
+        FRA_fascist_gangs = {            
+			picture = generic_fascism_drift_bonus
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+
+			modifier = {
+                production_speed_industrial_complex_factor = -0.1
+			}
+		}
+
+        FRA_SNCF = {
+			picture = SNCF
+            allowed = {
+                always = no
+            }
+            allowed_civil_war = {
+                always = yes
+            }
+
+            modifier = {
+                production_speed_infrastructure_factor = 0.15
+            }
+        }
+    }
+}

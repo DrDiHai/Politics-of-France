@@ -1,0 +1,43 @@
+FRA_increase_fascist_agitation = {
+    if = {
+        limit = {
+            has_country_flag = FRA_fascist_agitation_2
+        }
+        set_country_flag = FRA_fascist_agitation_3
+    }
+    if = {
+        limit = {
+            has_country_flag = FRA_fascist_agitation_1
+        }
+        set_country_flag = FRA_fascist_agitation_2
+    }
+    set_country_flag = FRA_fascist_agitation_1
+}
+
+FRA_increase_communist_agitation  = {
+    if = {
+        limit = {
+            has_country_flag = FRA_communist_agitation_2
+        }
+        set_country_flag = FRA_communist_agitation_3
+    }
+    if = {
+        limit = {
+            has_country_flag = FRA_communist_agitation_1
+        }
+        set_country_flag = FRA_communist_agitation_2
+    }
+    set_country_flag = FRA_communist_agitation_1
+}
+
+FRA_remove_communist_agitation = {
+    clr_country_flag = FRA_communist_agitation_1
+    clr_country_flag = FRA_communist_agitation_2
+    clr_country_flag = FRA_communist_agitation_3
+}
+
+FRA_remove_fascist_agitation = {
+    clr_country_flag = FRA_fascist_agitation_1
+    clr_country_flag = FRA_fascist_agitation_2
+    clr_country_flag = FRA_fascist_agitation_3
+}

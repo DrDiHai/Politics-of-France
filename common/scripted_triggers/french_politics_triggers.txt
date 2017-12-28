@@ -1,0 +1,16 @@
+has_no_special_election_event = {
+    NOT = { 
+        AND = { 
+            tag = USA 
+            date < 1.1.1949
+        } 
+    }
+    OR = { NOT = { tag = SPR } NOT = { date < 1937.1.1 } }
+    OR = { NOT = { tag = FRA } NOT = { date < 1937.1.1 } }
+}
+
+FRA_has_popular_front = {
+    has_country_flag = FRA_popular_front
+    NOT = { has_country_flag = FRA_no_popular_front }
+    tag = FRA
+}
