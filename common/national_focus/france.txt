@@ -1755,7 +1755,8 @@ focus_tree = {
 		icon = GFX_goal_generic_war_with_comintern
         prerequisite = { focus = FRA_labor_act focus = FRA_matignon_agreement } 
         mutually_exclusive = { focus = FRA_youth_organizations } 
-        available = {}
+        available = {
+		}
         relative_position_id = FRA_labor_act 
         x = 0
         y = 2
@@ -2029,7 +2030,7 @@ focus_tree = {
 	focus = {
 		id = FRA_join_comintern
 		icon = GFX_goal_support_communism
-		mutually_exclusive = { focus = FRA_humanite_unie }
+		mutually_exclusive = { focus = FRA_franco_soviet_split }
 	 	available = {
 	 		is_puppet = no
 	 		is_in_faction = no
@@ -2042,7 +2043,10 @@ focus_tree = {
  				exists = yes
  				has_government = communism
  				is_faction_leader = yes
- 			}
+ 			}			 
+			NOT = {
+				has_country_flag = FRA_sov_yes_pact_disagreement
+			}
 		}
 	 	prerequisite = { focus = FRA_national_mobilization }
 	 	bypass = {
@@ -2060,29 +2064,6 @@ focus_tree = {
 		#}
 		completion_reward = {
 			SOV = { country_event = { id = soviet.29 days = 1 } }
-		}
-	}	
-
-	focus = {
-		id = FRA_humanite_unie
-		icon = GFX_goal_generic_dangerous_deal
-		mutually_exclusive = { focus = FRA_join_comintern }
-	 	available = {
-	 		is_puppet = no
-		}
-	 	prerequisite = { focus = FRA_national_mobilization }
-         relative_position_id = FRA_national_mobilization
-		x = -1
-		y = 1
-		cost = 10
-
-		available_if_capitulated = yes
-
-		#ai_will_do = {
-		#	factor = 1
-		#}
-		completion_reward = {
-			set_rule = { can_create_factions = yes }
 		}
 	}	
 
@@ -2861,5 +2842,128 @@ focus_tree = {
 	}
 
 
+	#### Franco-Soviet split tree
+	focus = {
+		id = FRA_franco_soviet_split
+		icon = GFX_goal_anti_comintern_pact
+		mutually_exclusive = { focus = FRA_join_comintern }
+	 	available = {
+	 		is_puppet = no
+			has_government = communism
+			OR = {
+				has_country_flag = FRA_sov_yes_pact_disagreement
+				has_country_flag = FRA_moderate_communists_win
+			}
+			NOT = {
+				is_in_faction_with = SOV
+			}
+		}
+	 	prerequisite = { focus = FRA_national_mobilization }
+        relative_position_id = FRA_national_mobilization
+		x = -1
+		y = 1
+		cost = 10
 
+		available_if_capitulated = yes
+
+		#ai_will_do = {
+		#	factor = 1
+		#}
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+		}
+	}	
+
+	focus = {
+		id = FRA_rapprochement_UK
+		icon = GFX_focus_FRA_britain
+		mutually_exclusive = { focus = FRA_humanite_unie }
+		available = {
+			is_puppet = no
+			is_in_faction = no
+			ENG = {
+				is_major = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = FRA
+				}
+			}
+		}
+		prerequisite = { focus = FRA_franco_soviet_split }
+		relative_position_id = FRA_franco_soviet_split
+		x = -1
+		y = 1
+		cost = 10
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			ENG = {
+				country_event = {
+					id = france_communist.2
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = FRA_humanite_unie
+		icon = GFX_goal_generic_dangerous_deal
+		mutually_exclusive = { focus = FRA_rapprochement_UK }
+	 	available = {
+	 		is_puppet = no
+			is_in_faction = no
+		}
+	 	prerequisite = { focus = FRA_franco_soviet_split }
+		 relative_position_id = FRA_franco_soviet_split
+		x = 1
+		y = 1
+		cost = 10
+
+		available_if_capitulated = yes
+
+		#ai_will_do = {
+		#	factor = 1
+		#}
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+				create_faction = "FRA_humanite_unie"
+		}
+	}
+
+	focus = {
+		id = FRA_new_popular_front
+		icon = GFX_goal_generic_major_alliance
+		available = {
+			hidden_trigger = {
+				has_global_flag = spanish_civil_war
+			}
+			has_global_flag = scw_over
+			any_other_country = {
+				original_tag = SPR
+				has_government = communism
+				is_in_faction_with = no
+			}
+			is_puppet = no
+			is_faction_leader = yes
+		}
+		prerequisite = {focus = FRA_humanite_unie }
+		relative_position_id = FRA_humanite_unie
+		x = 0
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					original_tag = SPR
+					has_government = communism
+				}
+				country_event = {
+					id = france_communist.4 days = 1
+				}
+			}
+		}
+		
+	}	
 }

@@ -1,0 +1,6 @@
+The mod replaces the political part of the French focus tree with a new one, intended to showcase the events in domestic French politics between 1936 and 1940. Also included are a number of events and the none-to-few Prime Ministers the country had in this time.
+There is a partial replacement of the political tree from vanilla and supporting events. Instead of the rather generic vanilla focuses, these aim to represent real problems the French government faced: demands for more worker rights, whether to intervene in Spain etc. Of course, I aim to expand this in the future.
+There is localisation in German and English. There should be in French for a mod like this, but my skills aren't up to the task. If you'd like to contribute a translation, that would be great.
+My main source has been Shirer's Collaps of the Third Republic. Certainly outdated, I look forward to corrections, suggestions and improvements!
+This is incompatible with any mods that change the French focus tree and events or ANY continuous focuses. It is compatible with Expert AI. Apart from that, no guarantees.
+Portrait of Léon Blum by Rothenrye (https://www.reddit.com/r/hoi4/comments/6qdcg3/portrait_of_leon_blum_french_coalition_leader_in/).

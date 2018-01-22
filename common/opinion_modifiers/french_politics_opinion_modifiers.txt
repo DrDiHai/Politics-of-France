@@ -32,4 +32,12 @@ opinion_modifiers = {
     FRA_support_fascism_spain_communist = {
         value = -20
     }
+
+    FRA_SOV_split_molotov_ribbentrop = {
+        value = -20
+    }
+
+    FRA_SOV_moderate_french_communists = {
+        value = -10
+    }
 }

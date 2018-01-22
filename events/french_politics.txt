@@ -1,5 +1,8 @@
 ﻿add_namespace = french_politics
 
+
+add_namespace = france_communist
+
 #1936 elections
 country_event = {
     id = french_politics.1
@@ -717,3 +720,419 @@ country_event = {
         add_political_power = -20
     }
 }
+
+
+#Communist, non-Comintern France reacts to Molotov-Ribbentrop
+country_event = {
+	id = france_communist.1
+	title = france_communist.1.t
+	desc = france_communist.1.d
+	picture = GFX_report_event_molotov_ribentrop_handshake
+
+
+	trigger = {
+		tag = FRA
+		SOV = { has_government = communism }
+		has_government = communism
+		has_global_flag = sov_yes_pact
+        not = {
+            is_in_faction_with = SOV
+            is_in_faction_with = GER
+        }
+	}
+
+	fire_only_once = yes
+	
+	mean_time_to_happen = {	days = 2	}
+
+    # Government falls, less Comintern loyal leader emerges
+	option = {
+		name = france_communist.1.a
+        
+        create_country_leader = {
+            name = "Jean-Marie Clamamus"
+            desc = "POLITICS_JEAN_MARIE_CLAMAMUS_DESC"
+            picture = "Portrait_France_Generic_1.dds"
+            expire = "1965.1.1"
+            ideology = leninism
+            traits = {
+            }
+        }
+		add_political_power = -20
+		add_popularity = {
+			ideology = communism
+			popularity = -0.1
+		}
+		#add_ideas = FRA_communism_banned
+
+		add_opinion_modifier = {
+			target = SOV
+			modifier = FRA_SOV_split_molotov_ribbentrop
+		}
+        SOV = {
+            add_opinion_modifier = {
+                target = FRA
+                modifier = FRA_SOV_split_molotov_ribbentrop
+            }
+        }
+        set_country_flag = FRA_sov_yes_pact_disagreement
+        set_country_flag = FRA_communist_leadership_resolved
+
+	}
+
+    # Comintern loyalists prevail
+	option = {
+		ai_chance = {	factor = 0 }
+        add_political_power = -40
+        add_popularity = {
+            ideology = communism
+            popularity = -0.2
+        }
+		name = france_communist.1.b
+	}
+}
+
+#Ask ENG whether we can rejoin
+country_event = {
+    id = france_communist.2
+    title = france_communist.2.t
+    desc = france_communist.2.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    trigger = {
+        tag = ENG
+        is_major = yes
+        is_faction_leader = yes
+        NOT = {
+            is_in_faction_with = FROM #Should be FRA
+        }
+    }
+
+    #Accept
+    option = {
+        name = france_communist.2.a
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 2
+                threat > 0.1
+            }
+            modifier = {
+                factor = 2
+                threat > 0.2
+            }
+            modifier = {
+                factor = 2
+                threat > 0.4
+            }
+            modifier = {
+                factor = 2
+                threat > 0.6
+            }
+        }
+        add_to_faction = FROM
+        FROM = {
+            add_ai_strategy = {
+                type = alliance
+                id = "ENG"
+                value = 200
+            }
+        }
+    }
+
+    #Refuse
+    option = {
+        name = france_communist.2.b
+
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 0
+                has_government = communism
+            }
+        }
+        
+		FROM = { 
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FRA_go_with_britain_reject
+			}
+		}
+    }
+}
+
+# Leadership struggle in the Communist party after takeover
+country_event = {
+    id = france_communist.3
+    title = france_communist.3.t
+    desc = france_communist.3.d
+
+    fire_only_once = yes
+
+    trigger = {
+        tag = FRA
+        has_government = communism
+        NOT = {
+            has_country_flag = FRA_communist_leadership_resolved
+        }
+    }
+
+    mean_time_to_happen = {
+        months = 12
+        modifier = {
+            factor = 0.75
+            is_ai = no
+        }
+    }
+
+    # Comintern loyalists prevail
+	option = {
+        ai_chance = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SOV = {
+                        has_government = communism
+                    }
+                }
+            }
+            modifier = {
+                factor = 0.25
+                NOT = {
+                    SOV = {
+                        is_major = yes
+                    }
+                }
+            }
+        }
+		ai_chance = {	factor = 0 }
+        add_political_power = -40
+        add_popularity = {
+            ideology = communism
+            popularity = -0.2
+        }
+		name = france_communist.3.a
+        set_country_flag = FRA_communist_leadership_resolved
+	}
+    # Government falls, less Comintern loyal leader emerges
+	option = {
+		name = france_communist.3.b
+        ai_chance = {
+            factor = 0.5
+            modifier = {
+                factor = 0
+                is_in_faction_with = SOV
+            }
+        }
+        
+        create_country_leader = {
+            name = "Jean-Marie Clamamus"
+            desc = "POLITICS_JEAN_MARIE_CLAMAMUS_DESC"
+            picture = "Portrait_France_Generic_1.dds"
+            expire = "1965.1.1"
+            ideology = leninism
+            traits = {
+            }
+        }
+		add_political_power = -20
+		add_popularity = {
+			ideology = communism
+			popularity = -0.1
+		}
+		#add_ideas = FRA_communism_banned
+
+		add_opinion_modifier = {
+			target = SOV
+			modifier = FRA_SOV_moderate_french_communists
+		}
+        SOV = {
+            add_opinion_modifier = {
+                target = FRA
+                modifier = FRA_SOV_moderate_french_communists
+            }
+        }
+        set_country_flag = FRA_moderate_communists_win
+        set_country_flag = FRA_communist_leadership_resolved
+
+	}
+
+}
+
+#France invites Spain to faction after splitting with SOV
+country_event = {
+    id = france_communist.4
+    title = france_communist.4.t
+    desc = france_communist.4.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = france_communist.4.a 
+		ai_chance = { factor = 90 }
+		FRA = {
+			country_event = france_communist.5
+			add_to_faction = ROOT
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "FRA"
+			value = 200
+		}
+    }
+    option = {
+        name = france_communist.4.b
+		ai_chance = { factor = 10 }
+        FRA = {
+            country_event = france_communist.6
+        }
+    }
+    option = {
+        trigger = {
+            any_country = {
+                tag = SOV
+                has_government = communism
+            }
+        }
+        name = france_communist.4.c
+		ai_chance = { factor = 5 }
+		add_ai_strategy = {
+			type = alliance
+			id = "SOV"
+			value = 200
+		}
+        SOV = {
+            country_event = france_communist.7
+        }
+    }
+}
+
+#Spain accepts!
+country_event = {
+    id = france_communist.5
+    title = france_communist.5.t
+    desc = france_communist.5.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = france_communist.5.a
+		effect_tooltip = {
+			add_to_faction = FROM
+		}
+	}
+}
+
+#Spain refuses...
+country_event = {
+    id = france_communist.6
+    title = france_communist.6.t
+    desc = france_communist.6.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = france_communist.6.a
+	}
+}
+
+#SOV: Spain wants to join Comintern
+country_event = {
+	id = france_communist.7
+	title = france_communist.7.t
+	desc = france_communist.7.d
+	picture = GFX_report_event_worried_french
+
+    trigger = {
+        any_country = {
+            original_tag = SPR
+            has_government = communism
+        }
+        has_government = communism
+        tag = SOV
+    }
+	
+	is_triggered_only = yes
+	
+    #Accept
+	option = {
+		name = france_communist.7.a
+		ai_chance = { factor = 60 }
+		add_ai_strategy = {
+			type = alliance
+			id = "SPR"
+			value = 200
+		}
+        FROM = {
+            country_event = france_communist.8
+        }
+        if = {
+            limit = {
+                any_country = {
+                    original_tag = FRA
+                    has_government = communism
+                }
+            }
+            country_event = france_communist.9
+        }
+    }
+
+    #Refuse
+	option = {
+		name = france_communist.7.b
+		ai_chance = { factor = 40 }
+		FROM = { country_event = france_communist.10 }
+	}
+}
+
+#SOV accepts!
+country_event = {
+    id = france_communist.8
+    title = france_communist.8.t
+    desc = france_communist.8.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = france_communist.8.a
+		effect_tooltip = {
+			add_to_faction = FROM
+		}
+	}
+}
+
+#Spain has jointed comintern instead...
+country_event = {
+    id = france_communist.9
+    title = france_communist.9.t
+    desc = france_communist.9.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = france_communist.9.a
+	}
+}
+
+#SOV won't let us join
+country_event = {
+    id = france_communist.10
+    title = france_communist.10.t
+    desc = france_communist.10.d
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = france_communist.10.a
+	}
+}
+
+

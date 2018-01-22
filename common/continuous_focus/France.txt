@@ -14,6 +14,47 @@ continuous_focus_palette = {
 			
 	position = { x = 50 y = 1000 }
 	
+	
+    focus = {
+        id = FRA_seek_parliament_support
+
+		icon = GFX_goal_continuous_increase_nu
+        available = {
+            tag = FRA
+            OR = {
+                has_government = democratic
+                #Has stable government
+            }
+			has_national_unity < 70
+        }
+        enabled = {
+			tag = FRA
+			has_government = democratic
+			OR = {
+					has_national_unity < 50
+				has_idea = FRA_disjointed_government
+			}
+        }
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 1000
+				has_war = yes
+				manpower_per_military_factory <  800
+				has_idea = FRA_disjointed_government
+			}
+		}
+		supports_ai_strategy = ai_focus_defense
+		supports_ai_strategy = ai_focus_aggressive
+
+		daily_cost = 1
+
+		modifier = {
+			political_power_cost = -0.5
+			unity_weekly = 0.005
+		}
+    }
 		
 	focus = {
 		id = continuous_naval_production
@@ -267,45 +308,4 @@ continuous_focus_palette = {
 		
 		available_if_capitulated = yes
 	}
-
-    focus = {
-        id = FRA_seek_parliament_support
-
-		icon = GFX_goal_continuous_increase_nu
-        available = {
-            tag = FRA
-            OR = {
-                has_government = democratic
-                #Has stable government
-            }
-			has_national_unity < 70
-        }
-        enabled = {
-			tag = FRA
-			has_government = democratic
-			OR = {
-					has_national_unity < 50
-				has_idea = FRA_disjointed_government
-			}
-        }
-
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 1000
-				has_war = yes
-				manpower_per_military_factory <  800
-				has_idea = FRA_disjointed_government
-			}
-		}
-		supports_ai_strategy = ai_focus_defense
-		supports_ai_strategy = ai_focus_aggressive
-
-		daily_cost = 1
-
-		modifier = {
-			political_power_cost = -0.5
-			unity_weekly = 0.005
-		}
-    }
 }
